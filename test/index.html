@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>crampon test</title>
+  <link rel="stylesheet" href="../build/build.css">
+  <style>
+    html { font-family: Helvetica, sans-serif; }
+    #fixture li {
+      font-size: 1.2em;
+      height: 2em;
+      line-height: 2em;
+    }
+  </style>
+</head>
+<body>
+  <h1>crampon test</h1>
+
+  <ul id="fixture">
+    <li data-crampon="one">Item 1</li>
+    <li data-crampon="one">Item 2</li>
+    <li data-crampon="one">Item 3</li>
+    <li data-crampon="two">Item 4</li>
+    <li data-crampon="two">Item 5</li>
+    <li data-crampon="three">Item 6</li>
+    <li data-crampon="three">Item 7</li>
+    <li data-crampon="three">Item 8</li>
+    <li data-crampon="three">Item 9</li>
+    <li data-crampon="four">Item 10</li>
+  </ul>
+
+  <script src="../build/build.js"></script>
+  <script>
+    var Crampon = require('crampon');
+    var fixture = document.getElementById('fixture');
+    new Crampon(fixture, {
+      width: '50px',
+      radius: '10px'
+    });
+  </script>
+</body>
+</html>

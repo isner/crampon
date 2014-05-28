@@ -1,0 +1,14 @@
+
+.crampon-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.crampon-list > li {
+  position: relative;
+}
+
+.crampon-list .crampon-box {
+  position: absolute;
+  top: 0;
+}
