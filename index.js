@@ -1,46 +1,49 @@
 
 /**
+ * Load dependencies.
+ */
+
+var classes = require('classes');
+
+/**
  * Expose `Crampon`.
  */
 
-module.exports = Crampon;
+exports = module.exports = Crampon;
 
 /**
  * Initialize a `Crampon` using a given `list`.
  *
  * @param {Element} list
- * @param {Object} [options]
  * @api public
  */
 
-function Crampon(list, options) {
-  options = options || {};
-  this.normalizeOptions(options);
+function Crampon(list) {
+  if (!(this instanceof Crampon))
+    return new Crampon(list);
+
   this.list = list;
-  this.setListStyle();
+  this.width = '40px';
+  this.radius = '7px';
+
   this.getListItems();
   this.getGroups();
-  this.addBoxes();
-  this.addBoxContent();
 }
 
 /**
- * Normalizes the `options` property of this `Crampon`.
+ * Renders the `Crampon` (modifies the DOM).
  *
- * @param {Object} options
- * @return {Crampon}
- * @api private
+ * @api public
  */
 
-Crampon.prototype.normalizeOptions = function (options) {
-  if (!options.width) options.width = '40px';
-  if (!options.radius) options.radius = '7px';
-  this.options = options;
-  return this;
+Crampon.prototype.render = function() {
+  this.setListStyle();
+  this.addBoxes();
+  this.addBoxContent();
 };
 
 /**
- * Adds our default styling to the `list`.
+ * Adds our default styling to `#list`.
  *
  * @return {Crampon}
  * @api private
@@ -48,15 +51,13 @@ Crampon.prototype.normalizeOptions = function (options) {
 
 Crampon.prototype.setListStyle = function () {
   var list = this.list;
-  if (list.classList) {
-    list.classList.add('crampon-list');
-  }
-  list.style.paddingLeft = this.options.width;
+  classes(list).add('crampon-list');
+  list.style.paddingLeft = this.width;
   return this;
 };
 
 /**
- * Get all `items` in a given `list`.
+ * Get all `#items` from `#list`.
  *
  * @return {Crampon}
  * @api private
@@ -74,7 +75,7 @@ Crampon.prototype.getListItems = function () {
 };
 
 /**
- * Assemble `groups` from a given list of `items`.
+ * Assemble `#groups` from `#items`.
  *
  * @return {Crampon}
  * @api private
@@ -101,7 +102,7 @@ Crampon.prototype.getGroups = function () {
 };
 
 /**
- * Insert `.crampon-box` elements into each item.
+ * Insert `div.crampon-box` elements into each `#items`.
  *
  * @return {Crampon}
  * @api private
@@ -110,7 +111,7 @@ Crampon.prototype.getGroups = function () {
 Crampon.prototype.addBoxes = function () {
   var items = this.items;
   var len = items.length;
-  var radius = this.options.radius;
+  var radius = this.radius;
   for (var i = 0; i < len; i++) {
     var box = document.createElement('div');
     box.className = 'crampon-box';
@@ -129,6 +130,7 @@ Crampon.prototype.addBoxes = function () {
  * @return {Crampon}
  * @api private
  */
+
 Crampon.prototype.addBoxContent = function () {
   var groups = this.groups;
   var groupIndex = 0;
@@ -139,7 +141,7 @@ Crampon.prototype.addBoxContent = function () {
       groupIndex++;
       var items = groups[name];
       var len = items.length;
-      var radius = this.options.radius;
+      var radius = this.radius;
 
       for (var i = 0; i < len; i++) {
         var box = items[i].getBox();
@@ -177,7 +179,7 @@ function Item(el) {
 }
 
 /**
- * Gets the `.crampon-box` element within a given `Item`
+ * Gets the `div.crampon-box` within a given `Item`
  *
  * @return {Element}
  * @api private
