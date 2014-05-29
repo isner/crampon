@@ -14,18 +14,24 @@ crampon.render();
 
 ### #width
 Sets the width of the left-padding area created to
-accomodate the category brackets.
+accomodate the crampon brackets.
 ```
 var crampon = new Crampon(elem);
 crampon.width = '50px';
 ```
 
 ### #radius
-Sets the border-radius of the brackets displayed to
-indicate categories.
+Sets the border-radius of the crampon brackets.
 ```
 var crampon = new Crampon(elem);
 crampon.radius = '10px';
+```
+
+### #color
+Sets the color of the crampon brackets.
+```
+var crampon = new Crampon(elem);
+crampon.color = '#ccc';
 ```
 
 ## Limitations

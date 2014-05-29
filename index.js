@@ -25,6 +25,7 @@ function Crampon(list) {
   this.list = list;
   this.width = '40px';
   this.radius = '7px';
+  this.color = '#000';
 
   this.getListItems();
   this.getGroups();
@@ -146,7 +147,7 @@ Crampon.prototype.addBoxContent = function () {
 
       for (var i = 0; i < len; i++) {
         var box = items[i].getBox();
-          box.style.borderLeft = '1px solid black';
+          box.style.borderLeft = '1px solid ' + this.color;
 
         // first in category
         if (i === 0) {
