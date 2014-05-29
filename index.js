@@ -116,6 +116,7 @@ Crampon.prototype.addBoxes = function () {
     var box = document.createElement('div');
     box.className = 'crampon-box';
     box.style.height = getComputedStyle(items[i].el).height;
+    box.style.lineHeight = getComputedStyle(items[i].el).height;
     box.style.width = radius;
     box.style.left = '-' + radius;
     box.style.textIndent = '-' + (parseInt(radius, 10) * 2.5) + 'px';
