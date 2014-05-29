@@ -1,9 +1,6 @@
 # Crampon
 A visual categorization indicator for lists.
 
-## Installation
-`component install isner/crampon`
-
 ## Usage
   ```
   var Crampon = require('crampon');
