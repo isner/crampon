@@ -5,8 +5,8 @@ A visual categorization indicator for lists.
 ```
 var Crampon = require('crampon');
 
-var elem = document.querySelector('#myList');
-var crampon = new Crampon(elem);
+var list = document.querySelector('ul');
+var crampon = new Crampon(list);
 crampon.render();
 ```
 
@@ -16,21 +16,21 @@ crampon.render();
 Sets the width of the left-padding area created to
 accomodate the crampon brackets.
 ```
-var crampon = new Crampon(elem);
+var crampon = new Crampon(list);
 crampon.width = '50px';
 ```
 
 ### #radius
 Sets the border-radius of the crampon brackets.
 ```
-var crampon = new Crampon(elem);
+var crampon = new Crampon(list);
 crampon.radius = '10px';
 ```
 
 ### #color
 Sets the color of the crampon brackets.
 ```
-var crampon = new Crampon(elem);
+var crampon = new Crampon(list);
 crampon.color = '#ccc';
 ```
 
