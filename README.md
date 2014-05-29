@@ -1,16 +1,15 @@
 # Crampon
 A visual categorization indicator for lists.
 
-## Installation
-component install isner/crampon
-
 ## Usage
+  ```
   var Crampon = require('crampon');
-  var myList = document.querySelector('#myList');
-  new Crampon(fixture, {
+  var elem = document.querySelector('#myList');
+  new Crampon(elem, {
     width: '50px',
     radius: '10px'
   });
+  ```
 
 ## Limitations
 1. Crampon will not reorder list items, so items that
