@@ -25,10 +25,10 @@ function Crampon(list, options) {
 }
 
 /**
- * Normalizes the `options` property of this `Tip`.
+ * Normalizes the `options` property of this `Crampon`.
  *
  * @param {Object} options
- * @return {Tip}
+ * @return {Crampon}
  * @api private
  */
 
@@ -42,7 +42,7 @@ Crampon.prototype.normalizeOptions = function (options) {
 /**
  * Adds our default styling to the `list`.
  *
- * @return {Tip}
+ * @return {Crampon}
  * @api private
  */
 
@@ -58,7 +58,7 @@ Crampon.prototype.setListStyle = function () {
 /**
  * Get all `items` in a given `list`.
  *
- * @return {Tip}
+ * @return {Crampon}
  * @api private
  */
 
@@ -76,7 +76,7 @@ Crampon.prototype.getListItems = function () {
 /**
  * Assemble `groups` from a given list of `items`.
  *
- * @return {Tip}
+ * @return {Crampon}
  * @api private
  */
 
@@ -103,7 +103,7 @@ Crampon.prototype.getGroups = function () {
 /**
  * Insert `.crampon-box` elements into each item.
  *
- * @return {Tip}
+ * @return {Crampon}
  * @api private
  */
 
@@ -126,7 +126,7 @@ Crampon.prototype.addBoxes = function () {
 /**
  * Adds visual content to the box of an `Item`
  *
- * @return {Tip}
+ * @return {Crampon}
  * @api private
  */
 Crampon.prototype.addBoxContent = function () {
