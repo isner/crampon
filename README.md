@@ -7,8 +7,8 @@ A visual categorization indicator for lists.
 ## Usage
   ```
   var Crampon = require('crampon');
-  var myList = document.querySelector('#myList');
-  new Crampon(fixture, {
+  var elem = document.querySelector('#myList');
+  new Crampon(elem, {
     width: '50px',
     radius: '10px'
   });
