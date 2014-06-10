@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>crampon test</title>
+  <link rel="stylesheet" href="../build/build.css">
+  <style>
+    html { font-family: Helvetica, sans-serif; }
+    #list li {
+      font-size: 1.2em;
+      height: 2em;
+      line-height: 2em;
+    }
+  </style>
+</head>
+<body>
+  <h1>crampon test</h1>
+
+  <ul id="list">
+    <li data-crampon="cars">Prowler</li>
+    <li data-crampon="cars">Viper</li>
+    <li data-crampon="cars">Focus</li>
+    <li data-crampon="coffee">French Roast</li>
+    <li data-crampon="coffee">Decaf</li>
+    <li data-crampon="groups">BSANA</li>
+    <li data-crampon="groups">AJA</li>
+    <li data-crampon="groups">AAM</li>
+    <li data-crampon="groups">NASA</li>
+    <li data-crampon="tools">Hammer</li>
+  </ul>
+
+  <script src="../build/build.js"></script>
+  <script>
+    var Crampon = require('crampon');
+    var list = document.getElementById('list');
+
+    var crampon = new Crampon(list);
+    crampon.width('50px');
+    crampon.color('black');
+    crampon.mapIcons({
+      cars: 'images/car95.svg',
+      coffee: 'images/hot51.svg',
+      groups: 'images/multiple25.svg',
+      tools: 'images/tools6.svg'
+    });
+    crampon.render();
+
+  </script>
+</body>
+</html>

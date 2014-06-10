@@ -2,7 +2,7 @@
   "name": "crampon",
   "repository": "isner/crampon",
   "description": "A visual categorization indicator for lists",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "dependencies": {
     "component/classes": "*"
   },

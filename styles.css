@@ -11,4 +11,9 @@
 .crampon-list .crampon-box {
   position: absolute;
   top: 0;
+  left: -10px;
+}
+
+.crampon-list .crampon-box img {
+  position: absolute;
 }

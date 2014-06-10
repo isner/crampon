@@ -1,37 +1,50 @@
-## Crampon
-A visual categorization indicator for lists.
+## crampon
+Ice-climbing, category grouper.
 
-## General Usage
+Crampon adds visual grouping of list items that belong
+together.
+
+## Installation
+
+Install with Component
+```
+$ component install isner/crampon
+```
+
+## Basic Usage
+
 ```
 var Crampon = require('crampon');
-
 var list = document.querySelector('ul');
+
 var crampon = new Crampon(list);
+crampon.mapIcons({
+  'groupOne': 'myIcon.png',
+  'groupTwo': 'yourIcon.svg'
+});
 crampon.render();
 ```
 
 ## API
 
-### #width
-Sets the width of the left-padding area created to
-accomodate the crampon brackets.
+### new Crampon(Element, [options])
+Initializes a `Crampon#` associated with a given
+list element. `Element` should be a `<ul>` or `<ol>`
+that contains one or more `<li>`s.
+
+### Crampon#width(String|Number)
+Sets the width (in pixels) of the left-padding area
+created to accomodate the crampon brackets.
 ```
 var crampon = new Crampon(list);
-crampon.width = '50px';
+crampon.width('50');
 ```
 
-### #radius
-Sets the border-radius of the crampon brackets.
-```
-var crampon = new Crampon(list);
-crampon.radius = '10px';
-```
-
-### #color
+### Crampon#color(String)
 Sets the color of the crampon brackets.
 ```
 var crampon = new Crampon(list);
-crampon.color = '#ccc';
+crampon.color('#ccc');
 ```
 
 ## Limitations

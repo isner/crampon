@@ -1,6 +1,6 @@
 
 /**
- * Load dependencies.
+ * Module dependencies.
  */
 
 var classes = require('classes');
@@ -12,39 +12,87 @@ var classes = require('classes');
 exports = module.exports = Crampon;
 
 /**
+ * Define default options.
+ */
+
+var defaults = {
+  width: '40px',
+  color: '#000'
+};
+
+/**
  * Initialize a `Crampon` using a given `list`.
  *
- * @param {Element} list
+ * @param {Element} list - [<ul>|<ol>]
+ * @param {Object} options
  * @api public
  */
 
-function Crampon(list) {
+function Crampon(list, options) {
   if (!(this instanceof Crampon))
     return new Crampon(list);
 
+  if (!list) throw new Error([
+    'Crampon constructor: ',
+    'undefined element argument'
+    ].join());
+
+  this.options = options || {};
+  this.applyOptions();
   this.list = list;
-  this.width = '40px';
-  this.radius = '7px';
-  this.color = '#000';
 
   this.getListItems();
   this.getGroups();
 }
 
 /**
- * Renders the `Crampon` (modifies the DOM).
+ * Applies user-defined options, or defaults.
  *
- * @api public
+ * @return {Crampon}
+ * @api private
  */
 
-Crampon.prototype.render = function() {
-  this.setListStyle();
-  this.addBoxes();
-  this.addBoxContent();
+Crampon.prototype.applyOptions = function () {
+  var that = this;
+  ['width', 'color']
+  .forEach(function (opt) {
+    that.options[opt] = that.options.hasOwnProperty(opt)
+      ? that.options[opt]
+      : defaults.hasOwnProperty(opt)
+        ? defaults[opt]
+        : null;
+  });
+  return this;
 };
 
 /**
- * Adds our default styling to `#list`.
+ * Sets `#icons`.
+ *
+ * Example:
+ * ```
+ * {
+ *   groupOne: 'firstIcon.png',
+ *   groupTwo: 'secondIcon.png'
+ * }
+ * ```
+ * @param {Object} map
+ * @return {Crampon}
+ * @api public
+ */
+
+Crampon.prototype.mapIcons = function (map) {
+  if (typeof map !== 'object') {
+    throw new Error([
+      'Crampon#mapIcons: ',
+      'invalid map argument'
+    ].join());
+  }
+  this.icons = map;
+  return this;
+};
+
+/**
+ * Applies default styling to `#list`.
  *
  * @return {Crampon}
  * @api private
@@ -53,8 +101,49 @@ Crampon.prototype.render = function() {
 Crampon.prototype.setListStyle = function () {
   var list = this.list;
   classes(list).add('crampon-list');
-  list.style.paddingLeft = this.width;
+  list.style.paddingLeft = this.options.width;
   return this;
+};
+
+/**
+ * Sets `Crampon#options.width`.
+ *
+ * @param {Number} width
+ * @return {Crampon}
+ * @api public
+ */
+
+Crampon.prototype.width = function (width) {
+  this.options.width = parseInt(width, 10) + 'px';
+  return this;
+};
+
+/**
+ * Sets `Crampon#options.color`.
+ *
+ * @param {String} color
+ * @return {Crampon}
+ * @api private
+ */
+
+Crampon.prototype.color = function (color) {
+  this.options.color = color;
+  return this;
+};
+
+/**
+ * Gets a given option property of `#Crampon`.
+ *
+ * @param {String} name
+ * @return {Mixed}
+ * @api private
+ */
+
+Crampon.prototype.getOption = function (name) {
+  if (this.options.hasOwnProperty(name)) {
+    return this.options[name];
+  }
+  return null;
 };
 
 /**
@@ -103,7 +192,8 @@ Crampon.prototype.getGroups = function () {
 };
 
 /**
- * Insert `div.crampon-box` elements into each `#items`.
+ * Insert `div.crampon-box` elements into
+ * each `#items`.
  *
  * @return {Crampon}
  * @api private
@@ -112,22 +202,18 @@ Crampon.prototype.getGroups = function () {
 Crampon.prototype.addBoxes = function () {
   var items = this.items;
   var len = items.length;
-  var radius = this.radius;
   for (var i = 0; i < len; i++) {
     var box = document.createElement('div');
     box.className = 'crampon-box';
     box.style.height = getComputedStyle(items[i].el).height;
     box.style.lineHeight = getComputedStyle(items[i].el).height;
-    box.style.width = radius;
-    box.style.left = '-' + radius;
-    box.style.textIndent = '-' + (parseInt(radius, 10) * 2.5) + 'px';
     items[i].el.insertBefore(box, items[i].el.firstChild);
   }
   return this;
 };
 
 /**
- * Adds visual content to the box of an `Item`
+ * Adds visual content to the box of an `Item`.
  *
  * @return {Crampon}
  * @api private
@@ -136,33 +222,26 @@ Crampon.prototype.addBoxes = function () {
 Crampon.prototype.addBoxContent = function () {
   var groups = this.groups;
   var groupIndex = 0;
+  var color = this.options.color;
 
   for (var name in groups) {
-    // key does not belong to the prototype
-    if (groups.hasOwnProperty(name)) {
-      groupIndex++;
-      var items = groups[name];
-      var len = items.length;
-      var radius = this.radius;
+    if (!groups.hasOwnProperty(name)) continue;
+    groupIndex++;
+    var items = groups[name];
 
-      for (var i = 0; i < len; i++) {
-        var box = items[i].getBox();
-          box.style.borderLeft = '1px solid ' + this.color;
+    for (var i = 0; i < items.length; i++) {
+      var box = items[i].getBox();
+      box.style.borderLeft = '3px solid ' + color;
 
-        // first in category
-        if (i === 0) {
-          box.innerHTML = groupIndex;
-          box.style.borderRadius = radius + ' 0 0 0';
-        }
-
-        // last in category
-        if (i === len - 1) {
-          box.style.borderRadius = i === 0
-            // last AND first
-            ? radius + ' 0 0 ' + radius
-            // only last
-            : '0 0 0 ' + radius;
-        }
+      // first in category
+      if (i === 0) {
+        items[i].addImage(this.icons[name]);
+      }
+      // last in category
+      else if (i === items.length - 1) {
+        var boxHeight = getComputedStyle(box).height;
+        box.style.height =
+          (parseFloat(boxHeight, 10) * 0.75) + 'px';
       }
     }
   }
@@ -170,7 +249,19 @@ Crampon.prototype.addBoxContent = function () {
 };
 
 /**
- * Initialize an `Item` from an LI element.
+ * Renders the `Crampon` (modifies the DOM).
+ *
+ * @api public
+ */
+
+Crampon.prototype.render = function() {
+  this.setListStyle();
+  this.addBoxes();
+  this.addBoxContent();
+};
+
+/**
+ * Initialize an `Item#` from an LI element.
  *
  * @param {Element} el
  * @api private
@@ -181,12 +272,38 @@ function Item(el) {
 }
 
 /**
- * Gets the `div.crampon-box` within a given `Item`
+ * Gets the `div.crampon-box` within a given `Item#`.
  *
  * @return {Element}
  * @api private
  */
 
 Item.prototype.getBox = function () {
-  return this.el.querySelector('.crampon-box');
+  var box = this.el.querySelector('.crampon-box');
+  if (!box) return null;
+  this.box = box;
+  return box;
+};
+
+/**
+ * Inserts an image into an `Item#el`.
+ *
+ * @param {String} src
+ * @api private
+ */
+
+Item.prototype.addImage = function (src) {
+  var image = document.createElement('img');
+  if (typeof src !== 'string')
+    throw new Error([
+      'Crampon, Item#addImage: ',
+      'invalid image src argument'
+    ].join());
+  var height = getComputedStyle(this.el).height;
+  height = parseFloat(height, 10);
+  image.style.marginTop = (height * 0.1) + 'px';
+  image.style.height = (height * 0.8) + 'px';
+  image.style.left = -(height + 5) + 'px';
+  image.src = src;
+  this.box.appendChild(image);
 };
