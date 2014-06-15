@@ -39,6 +39,7 @@ created to accomodate the crampon brackets.
 var crampon = new Crampon(list);
 crampon.width('50');
 ```
+Defaults to `40px`.
 
 ### Crampon#color(String)
 Sets the color of the crampon brackets.
@@ -46,6 +47,16 @@ Sets the color of the crampon brackets.
 var crampon = new Crampon(list);
 crampon.color('#ccc');
 ```
+Defaults to `#000`.
+
+### Crampon#markerWidth(String|Number)
+Sets the width (in pixels) of the line which marks
+separate categories.
+```
+var crampon = new Crampon(list);
+crampon.markerWidth('5px');
+```
+Defaults to `3px`.
 
 ## Limitations
 1. Crampon will not reorder list items, so items that

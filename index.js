@@ -17,7 +17,8 @@ exports = module.exports = Crampon;
 
 var defaults = {
   width: '40px',
-  color: '#000'
+  color: '#000',
+  markerWidth: '3px'
 };
 
 /**
@@ -54,7 +55,7 @@ function Crampon(list, options) {
 
 Crampon.prototype.applyOptions = function () {
   var that = this;
-  ['width', 'color']
+  ['width', 'color', 'markerWidth']
   .forEach(function (opt) {
     that.options[opt] = that.options.hasOwnProperty(opt)
       ? that.options[opt]
@@ -115,6 +116,19 @@ Crampon.prototype.setListStyle = function () {
 
 Crampon.prototype.width = function (width) {
   this.options.width = parseInt(width, 10) + 'px';
+  return this;
+};
+
+/**
+ * Sets `Crampon#options.markerWidth`, in pixels.
+ *
+ * @param {Number} width
+ * @return {Crampon}
+ * @api public
+ */
+
+Crampon.prototype.markerWidth = function (width) {
+  this.options.markerWidth = parseInt(width, 10) + 'px';
   return this;
 };
 
@@ -223,6 +237,7 @@ Crampon.prototype.addBoxContent = function () {
   var groups = this.groups;
   var groupIndex = 0;
   var color = this.options.color;
+  var markerWidth = this.options.markerWidth;
 
   for (var name in groups) {
     if (!groups.hasOwnProperty(name)) continue;
@@ -231,17 +246,17 @@ Crampon.prototype.addBoxContent = function () {
 
     for (var i = 0; i < items.length; i++) {
       var box = items[i].getBox();
-      box.style.borderLeft = '3px solid ' + color;
+      box.style.borderLeft = markerWidth + ' solid ' + color;
 
       // first in category
       if (i === 0) {
         items[i].addImage(this.icons[name]);
       }
       // last in category
-      else if (i === items.length - 1) {
+      if (i === items.length - 1) {
         var boxHeight = getComputedStyle(box).height;
         box.style.height =
-          (parseFloat(boxHeight, 10) * 0.75) + 'px';
+          (parseFloat(boxHeight, 10) * 0.85) + 'px';
       }
     }
   }
@@ -302,7 +317,8 @@ Item.prototype.addImage = function (src) {
   var height = getComputedStyle(this.el).height;
   height = parseFloat(height, 10);
   image.style.marginTop = (height * 0.1) + 'px';
-  image.style.height = (height * 0.8) + 'px';
+  image.style.maxHeight = (height * 0.8) + 'px';
+  image.style.width = (height * 0.8) + 'px';
   image.style.left = -(height + 5) + 'px';
   image.src = src;
   this.box.appendChild(image);

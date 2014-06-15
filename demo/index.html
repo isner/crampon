@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="../build/build.css">
   <style>
     html { font-family: Helvetica, sans-serif; }
-    #list li {
+    li {
       font-size: 1.2em;
       height: 2em;
       line-height: 2em;
@@ -15,7 +15,7 @@
 <body>
   <h1>crampon test</h1>
 
-  <ul id="list">
+  <ul id="list1">
     <li data-crampon="cars">Prowler</li>
     <li data-crampon="cars">Viper</li>
     <li data-crampon="cars">Focus</li>
@@ -28,21 +28,46 @@
     <li data-crampon="tools">Hammer</li>
   </ul>
 
+  <ul id="list2">
+    <li data-crampon="cars">Prowler</li>
+    <li data-crampon="coffee">Columbian</li>
+    <li data-crampon="coffee">Extra Bold</li>
+    <li data-crampon="coffee">French Roast</li>
+    <li data-crampon="coffee">Decaf</li>
+    <li data-crampon="groups">BSANA</li>
+    <li data-crampon="tools">Awl</li>
+    <li data-crampon="tools">Rasp</li>
+    <li data-crampon="tools">Vice</li>
+    <li data-crampon="tools">Hammer</li>
+  </ul>
+
   <script src="../build/build.js"></script>
   <script>
     var Crampon = require('crampon');
-    var list = document.getElementById('list');
+    var list1 = document.getElementById('list1');
+    var list2 = document.getElementById('list2');
 
-    var crampon = new Crampon(list);
-    crampon.width('50px');
-    crampon.color('black');
-    crampon.mapIcons({
+    var crampon2 = new Crampon(list1);
+    crampon2.width('50px');
+    crampon2.markerWidth(2);
+    crampon2.color('green');
+    crampon2.mapIcons({
       cars: 'images/car95.svg',
       coffee: 'images/hot51.svg',
       groups: 'images/multiple25.svg',
       tools: 'images/tools6.svg'
     });
-    crampon.render();
+    crampon2.render();
+
+    var crampon2 = new Crampon(list2);
+    crampon2.width('50px');
+    crampon2.mapIcons({
+      cars: 'images/car95.svg',
+      coffee: 'images/hot51.svg',
+      groups: 'images/multiple25.svg',
+      tools: 'images/tools6.svg'
+    });
+    crampon2.render();
 
   </script>
 </body>
