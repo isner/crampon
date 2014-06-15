@@ -8,9 +8,9 @@
 You may now specify the width of the vertical
 bars which marks categories.
 
-Setter: `Crampon#markerWidth(String)`
+Setter: `Crampon#markerWidth(value)`
 
-* `String` should be the width value including `px`
+* `value {String|Number}` with or without `px` suffix
 * Defaults to `3px`
 
 Getter: `Crampon#getOption('markerWidth')`
