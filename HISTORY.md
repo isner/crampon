@@ -1,6 +1,12 @@
 
 # HISTORY
 
+## 0.3.2
+
+### Fixed broken demo
+
+`.gitignore` included `build` directory, so you couldn't clone and view the demo
+
 ## 0.3.1
 
 ### New option: Marker width
