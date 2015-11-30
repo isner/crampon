@@ -1,11 +1,18 @@
 
 # HISTORY
 
+## 1.0.0
+
+### Build with Gulp instead of Component
+
+- Removes `component.json` and `/build`.
+- Adds `package.json` and `/dist`.
+
 ## 0.3.2
 
 ### Fixed broken demo
 
-`.gitignore` included `build` directory, so you couldn't clone and view the demo
+- `.gitignore` included `build` directory, so you couldn't clone and view the demo
 
 ## 0.3.1
 

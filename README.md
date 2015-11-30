@@ -1,37 +1,67 @@
-## Crampon
+# Crampon
 
 Crampon adds visual grouping of list items that belong
 together.
 
-## Installation
+## Usage
 
-Install with Component
+Given the following markup
 
-```bash
-$ component install isner/crampon
+```html
+<ul>
+  <li data-crampon="animal">Bear</li>
+  <li data-crampon="animal">Lemur</li>
+  <li data-crampon="animal">Whale</li>
+  <li data-crampon="fruit">Apple</li>
+  <li data-crampon="fruit">Orange</li>
+</ul>
 ```
 
-## Basic Usage
+The following JavaScript
 
 ```js
-var Crampon = require('crampon');
 var list = document.querySelector('ul');
 
-var crampon = new Crampon(list);
-crampon.mapIcons({
-  'groupOne': 'myIcon.png',
-  'groupTwo': 'yourIcon.svg'
-});
-crampon.render();
+new Crampon(list)
+  .mapIcons({
+    'animal': 'animal.png',
+    'fruit': 'fruit.svg'
+  })
+  .render();
 ```
+
+will construct a Crampon list which visually groups animals and fruit.
+
+## Directions
+
+Include `dist/crampon.js` & `dist/crampon.css` in your project. The JavaScript file exposes the `Crampon` constructor.
+
+## Demo
+
+Clone the repository and open `demo/index.html` in a browser.
 
 ## API
 
-### new Crampon(Element, [options])
+### new Crampon(el[, options])
 
-Initializes a `Crampon#` associated with a given
-list element. `Element` should be a `<ul>` or `<ol>`
-that contains one or more `<li>`s.
+Initializes a `Crampon` for a given
+list element.
+
+#### el {HTMLElement}
+
+A `<ul>` or `<ol>` that contains one or more `<li>`s.
+
+#### options {Object}
+
+TODO
+
+### Crampon#mapIcons(map)
+
+Maps each list group to its corresponding icon (see [Usage]('Usage') for example).
+
+#### map {Object}
+
+The map must contain *keys* which correspond to values used in the `data-crampon` attribute of each `<li>` in the list groups, and *values* that correspond to image files you wish to use to represent that group.
 
 ### Crampon#width(String|Number)
 
