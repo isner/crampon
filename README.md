@@ -57,7 +57,7 @@ TODO
 
 ### Crampon#mapIcons(map)
 
-Maps each list group to its corresponding icon (see [Usage]('Usage') for example).
+Maps each list group to its corresponding icon (see [Usage](#usage) for example).
 
 #### map {Object}
 
